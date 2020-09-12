@@ -6,7 +6,7 @@
 #define RELAY_PIN 4
 
 // Параметры WiFi сети, к которой подключаемся
-const char *ssid = "Sumrak";
+const char *ssid = "Sumrak3333333";
 const char *password = "10041997";
 
 void setup()
