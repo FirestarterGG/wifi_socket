@@ -1,1 +1,1 @@
-# wifi_socket
+# Код WiFi розетки на ESP8266
