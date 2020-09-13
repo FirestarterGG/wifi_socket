@@ -7,12 +7,15 @@
 #define SSID "Sumrak"                               // Имя WiFi сети, к которой подключаемся
 #define PASSWORD "10041997"                         // Пароль от WiFi сети 
 #define SERVER_URL "http://192.168.0.26:8000/"      // Адрес backend сервера
+#define HOST_NAME "Smart Socket: MAIN"              // Имя устройства в сети
 
 
 // Функция настройки
 void setup()
 {
     Serial.begin(115200);
+
+    WiFi.hostname(HOST_NAME); // Задание имени устройства
     WiFi.begin(SSID, PASSWORD);
     WiFi.mode(WIFI_STA); // Отключение режима точки доступа. Варианты: WIFI_AP, WIFI_STA, WIFI_AP_STA
 
@@ -22,12 +25,17 @@ void setup()
     while (WiFi.status() != WL_CONNECTED)
     {
         delay(1000);
-        Serial.println("[ Connecting ]");
+        Serial.print("[ Connecting to \"");
+        Serial.print(SSID);
+        Serial.println("\" ]");
     }
 
-    Serial.print("Local IP address of this device: [ ");
+    Serial.print("\n[ Connected to \"");
+    Serial.print(SSID);
+    Serial.println("\" ]");
+    Serial.print("IP address of this device: [ ");
     Serial.print(WiFi.localIP());
-    Serial.print(" ]\n");
+    Serial.println(" ]");
 }
 
 
@@ -57,11 +65,14 @@ void loop()
             const bool status = root["status"];
 
             // Вывод данных на монитор порта
-            Serial.print("name:");
+            Serial.print("\n----- RESPONSE FROM [ ");
+            Serial.print(SERVER_URL);
+            Serial.println(" ] -----");
+            Serial.print("[ Name ]: ");
             Serial.println(name);
-            Serial.print("ip:");
+            Serial.print("[ IP ]: ");
             Serial.println(ip);
-            Serial.print("status:");
+            Serial.print("[ Status ]: ");
             Serial.println(status);
 
             if (status == 1 || status == true)
