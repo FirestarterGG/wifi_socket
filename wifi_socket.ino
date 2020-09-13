@@ -2,17 +2,18 @@
 #include <ESP8266HTTPClient.h>
 #include <ArduinoJson.h>
 
-// Номер управляющего пина
-#define RELAY_PIN 4
+// Глобольные настройки
+#define RELAY_PIN 4                                 // Номер управляющего пина
+#define SSID "Sumrak"                               // Имя WiFi сети, к которой подключаемся
+#define PASSWORD "10041997"                         // Пароль от WiFi сети 
+#define SERVER_URL "http://192.168.0.26:8000/"      // Адрес backend сервера
 
-// Параметры WiFi сети, к которой подключаемся
-const char *ssid = "Sumrak";
-const char *password = "10041997";
 
+// Функция настройки
 void setup()
 {
     Serial.begin(115200);
-    WiFi.begin(ssid, password);
+    WiFi.begin(SSID, PASSWORD);
     WiFi.mode(WIFI_STA); // Отключение режима точки доступа. Варианты: WIFI_AP, WIFI_STA, WIFI_AP_STA
 
     pinMode(RELAY_PIN, OUTPUT);
@@ -21,14 +22,16 @@ void setup()
     while (WiFi.status() != WL_CONNECTED)
     {
         delay(1000);
-        Serial.println("Connecting...");
+        Serial.println("[ Connecting ]");
     }
 
-    Serial.print("LOCAL IP OF THE DEVICE IS: ");
+    Serial.print("Local IP address of this device: [ ");
     Serial.print(WiFi.localIP());
-    Serial.print("\n");
+    Serial.print(" ]\n");
 }
 
+
+// Функция основного цикла исполнения
 void loop()
 {
     // Проверка статуса подключения
@@ -36,7 +39,7 @@ void loop()
     {
         HTTPClient http;
 
-        http.begin("http://192.168.0.26:8000/");
+        http.begin(SERVER_URL);
 
         int httpCode = http.GET();
 
