@@ -8,6 +8,7 @@
 #define PASSWORD "10041997"                         // Пароль от WiFi сети 
 #define SERVER_URL "http://192.168.0.26:8000/"      // Адрес backend сервера
 #define HOST_NAME "Smart Socket: MAIN"              // Имя устройства в сети
+#define REQUEST_DELAY 500                           // Задержка отправки запросов на backend (мс)
 
 
 // Функция настройки
@@ -89,5 +90,5 @@ void loop()
     }
 
     // Задержка запроса
-    delay(200);
+    delay(REQUEST_DELAY);
 }
