@@ -19,17 +19,13 @@ void setup()
     while (WiFi.status() != WL_CONNECTED)
     {
         delay(1000);
-        Serial.print("[ Connecting to \"");
-        Serial.print(SSID);
-        Serial.println("\" ]");
+        Serial.println((String) "[  Connecting to \"" + SSID + "\"  ]");
     }
 
-    Serial.print("\n[ Connected to \"");
-    Serial.print(SSID);
-    Serial.println("\" ]");
-    Serial.print("IP address of this device: [ ");
+    Serial.println((String) "\n[  Connected to \"" + SSID + "\"  ]\n");
+    Serial.print((String) "------> IP address of this device: [  ");
     Serial.print(WiFi.localIP());
-    Serial.println(" ]");
+    Serial.println("  ] <------");
 }
 
 
@@ -59,21 +55,14 @@ void loop()
             const bool status = root["status"];
 
             // Вывод данных на монитор порта
-            Serial.print("\n----- RESPONSE FROM [ ");
-            Serial.print(SERVER_URL);
-            Serial.println(" ] -----");
-            Serial.print("[ Name ]: ");
-            Serial.println(name);
-            Serial.print("[ IP ]: ");
-            Serial.println(ip);
-            Serial.print("[ Status ]: ");
-            Serial.println(status);
+            Serial.println((String) "\n----- RESPONSE FROM [ " + SERVER_URL + " ] -----");
+            Serial.println((String) "[  Name  ]: " + name + "\n[  IP  ]: " + ip + "\n[  Status  ]: " + status);
 
-            if (status == 1 || status == true)
+            if (status == true)
             {
                 digitalWrite(RELAY_PIN, LOW);
             }
-            else if (status == 0 || status == false)
+            else if (status == false)
             {
                 digitalWrite(RELAY_PIN, HIGH);
             }
