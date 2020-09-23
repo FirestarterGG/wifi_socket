@@ -1,6 +1,11 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+// Библиотеки для работы с ESP и кодовой базой Arduino
+#include <ESP8266WiFi.h>
+#include <ESP8266HTTPClient.h>
+#include <ArduinoJson.h>
+
 // Глобольные настройки
 #define RELAY_PIN 4                                 // Номер управляющего пина
 #define SSID "Sumrak"                               // Имя WiFi сети, к которой подключаемся
